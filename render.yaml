@@ -1,0 +1,31 @@
+services:
+  - type: worker
+    name: hermes-agent
+    runtime: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    numInstances: 1
+    disk:
+      name: hermes-data
+      mountPath: /var/data
+      sizeGB: 10
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HERMES_HOME
+        value: /var/data/.hermes
+      - key: MESSAGING_CWD
+        value: /opt/render/project/src
+      - key: TERMINAL_ENV
+        value: local
+      - key: HERMES_INFERENCE_PROVIDER
+        value: openrouter
+      - key: HERMES_MODEL
+        value: anthropic/claude-opus-4.6
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_ALLOWED_USERS
+        sync: false
