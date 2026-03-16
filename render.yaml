@@ -3,6 +3,7 @@ services:
     name: hermes-agent
     runtime: docker
     plan: starter
+    autoDeployTrigger: off
     dockerfilePath: ./Dockerfile
     dockerContext: .
     numInstances: 1
