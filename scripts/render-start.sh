@@ -16,8 +16,10 @@ touch "${HERMES_HOME}/.env"
 cd /opt/render/project/src
 
 echo "[render-start] Starting Hermes gateway"
+set +e
 hermes gateway
 status=$?
+set -e
 
 echo "[render-start] Hermes gateway exited with status ${status}"
 
