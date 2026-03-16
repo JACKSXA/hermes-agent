@@ -15,4 +15,20 @@ touch "${HERMES_HOME}/.env"
 
 cd /opt/render/project/src
 
-exec hermes gateway
+echo "[render-start] Starting Hermes gateway"
+hermes gateway
+status=$?
+
+echo "[render-start] Hermes gateway exited with status ${status}"
+
+if [[ -f "${HERMES_HOME}/gateway_state.json" ]]; then
+  echo "[render-start] gateway_state.json"
+  cat "${HERMES_HOME}/gateway_state.json"
+fi
+
+if [[ -f "${HERMES_HOME}/logs/gateway.log" ]]; then
+  echo "[render-start] tail gateway.log"
+  tail -n 200 "${HERMES_HOME}/logs/gateway.log"
+fi
+
+exit "${status}"
